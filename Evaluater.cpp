@@ -1,4 +1,5 @@
 #include <vector>
+#include <cmath>
 #include "flags.cpp"
 #include "Math.cpp"
 using namespace std;
@@ -11,6 +12,7 @@ private:
     double result;
     bool degree_mode;
     bool debug_eval;
+    bool no_result;
 
     int numBrackets(int start, int end)
     {
@@ -95,9 +97,10 @@ private:
 
     int getFirstNonNumToRight(int index, int end)
     {
-        for(int i = index; i < end; i++)
+        for (int i = index; i < end; i++)
         {
-            if(flags[i] != NUM || flags[i] != NOTHING || flags[i] != VAR) return i;
+            if (flags[i] != NUM)
+                return i;
         }
         return -1;
     }
@@ -126,6 +129,7 @@ private:
 public:
     double evaluate(int start, int end)
     {
+        bool no_result = false;
         if (debug_eval)
         {
             cout << "Received vectors:" << endl;
@@ -174,6 +178,12 @@ public:
                     putNum(getLog(equation[index2]), index2);
                 else if (equation[i] == LN)
                     putNum(getLn(equation[index2]), index2);
+                else if (equation[i] == SQRT)
+                    putNum(sqrt(equation[index2]), index2);
+                else if (equation[i] == CBRT)
+                    putNum(pow(equation[index2], 0.3333333333), index2);
+                else if (equation[i] == RECI)
+                    putNum(1.0 / equation[index2], index2);
 
                 clearIndex(i);
             }
@@ -187,6 +197,7 @@ public:
 
         vector<int> bin_order;
         bin_order.push_back(LOG_);
+        bin_order.push_back(MOD);
         bin_order.push_back(PERM);
         bin_order.push_back(COMB);
         bin_order.push_back(POW);
@@ -214,6 +225,8 @@ public:
 
                     if (equation[j] == LOG_)
                         putNum(getLogBaseN(equation[index2], equation[index1]), index1);
+                    else if (equation[j] == MOD)
+                        putNum(int(equation[index1]) % int(equation[index2]), index1);
                     else if (equation[j] == PERM)
                         putNum(getPerm(equation[index1], equation[index2]), index1);
                     else if (equation[j] == COMB)
@@ -235,14 +248,50 @@ public:
             }
         }
 
-        for(int i = start; i < end; i++)
+        for (int i = start; i < end; i++)
         {
-            if(flags[i] == MULTI)
+            if (flags[i] == MULTI)
             {
-                if(equation[i] == MEAN_SD)
+                if (equation[i] == MEAN_SD)
                 {
                     index1 = getFirstNumToRight(i, end);
                     index2 = getFirstNonNumToRight(index1, end);
+
+                    if (index2 == -1)
+                        index2 = end;
+
+                    if (debug_eval)
+                        printf("Index1: %d and Index2: %d\n", index1, index2);
+
+                    float sum = 0.0;
+                    int nums = 0;
+                    int last_num_index;
+
+                    for (int j = index1; j < index2; j++)
+                    {
+                        if (flags[j] == NUM)
+                        {
+                            sum += equation[j];
+                            nums++;
+                            last_num_index = j;
+
+                            if (debug_eval)
+                                printf("Index visited for mean_sd: %d\n", j);
+                        }
+                    }
+
+                    float mean = sum / nums;
+                    sum = 0.0;
+
+                    for (int j = index1; j <= last_num_index; j++)
+                    {
+                        if (flags[j] == NUM)
+                            sum += (mean - equation[j]) * (mean - equation[j]);
+                    }
+                    printf("Mean: %f and Standard deviation: %f", mean, sqrt(sum / nums));
+
+                    no_result = true;
+                    makeEmpty(i, last_num_index);
                 }
             }
         }
@@ -253,9 +302,10 @@ public:
             printVectors();
         }
 
-        if (numNums(start, end) == 1)
+        if (numNums(start, end) == 1 && !no_result)
             return equation[getFirstNumToRight(start, end)];
-        else printf("Error in evaluation");
+        else if (!no_result)
+            printf("Error in evaluation");
 
         return 0;
     }
