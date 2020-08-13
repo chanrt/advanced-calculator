@@ -22,7 +22,10 @@ enum UNARY_OPERATIONS
     SEC,
     COT,
     LOG,
-    LN
+    LN,
+    SQRT,
+    CBRT,
+    RECI
 };
 
 enum BINARY_OPERATIONS
@@ -34,7 +37,8 @@ enum BINARY_OPERATIONS
     POW,
     PERM,
     COMB,
-    LOG_
+    LOG_,
+    MOD,
 };
 
 enum MULTIPLE
