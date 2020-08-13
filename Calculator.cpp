@@ -31,6 +31,7 @@ void initializeFunctions()
     reader.addEntity("*", BINARY, MUL);
     reader.addEntity("/", BINARY, DIV);
     reader.addEntity("^", BINARY, POW);
+    reader.addEntity("%", BINARY, MOD);
     reader.addEntity("P", BINARY, PERM);
     reader.addEntity("C", BINARY, COMB);
     reader.addEntity("log_", BINARY, LOG_);
@@ -44,6 +45,9 @@ void initializeFunctions()
     reader.addEntity("cot", UNARY, COT);
     reader.addEntity("log", UNARY, LOG);
     reader.addEntity("ln", UNARY, LN);
+    reader.addEntity("sqrt", UNARY, SQRT);
+    reader.addEntity("cbrt", UNARY, CBRT);
+    reader.addEntity("~", UNARY, RECI);
 
     reader.addEntity("mean_sd", MULTI, MEAN_SD);
 
