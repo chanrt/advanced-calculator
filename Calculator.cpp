@@ -36,19 +36,23 @@ void initializeFunctions()
     reader.addEntity("C", BINARY, COMB);
     reader.addEntity("log_", BINARY, LOG_);
 
+    reader.addEntity("~", UNARY, RECI);
     reader.addEntity("!", UNARY, FACT);
+    reader.addEntity("sqrt", UNARY, SQRT);
+    reader.addEntity("cbrt", UNARY, CBRT);
     reader.addEntity("sin", UNARY, SIN);
     reader.addEntity("cos", UNARY, COS);
     reader.addEntity("tan", UNARY, TAN);
     reader.addEntity("csc", UNARY, CSC);
     reader.addEntity("sec", UNARY, SEC);
     reader.addEntity("cot", UNARY, COT);
+    reader.addEntity("asin", UNARY, ASIN);
+    reader.addEntity("acos", UNARY, ACOS);
+    reader.addEntity("atan", UNARY, ATAN);
     reader.addEntity("log", UNARY, LOG);
     reader.addEntity("ln", UNARY, LN);
-    reader.addEntity("sqrt", UNARY, SQRT);
-    reader.addEntity("cbrt", UNARY, CBRT);
-    reader.addEntity("~", UNARY, RECI);
-
+    
+    
     reader.addEntity("mean_sd", MULTI, MEAN_SD);
 
     reader.addEntity("(", META, OPEN_BRAC);

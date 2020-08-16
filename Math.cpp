@@ -78,4 +78,28 @@ double getTan(double num, bool degree_mode)
         return tan(num);
 }
 
+double getArcSin(double num, bool degree_mode)
+{
+    if(degree_mode)
+        return getDegrees(asin(num));
+    else
+        return asin(num);
+}
+
+double getArcCos(double num, bool degree_mode)
+{
+    if(degree_mode)
+        return getDegrees(acos(num));
+    else
+        return asin(num);
+}
+
+double getArcTan(double num, bool degree_mode)
+{
+    if(degree_mode)
+        return getDegrees(atan(num));
+    else
+        return asin(num);
+}
+
 #endif

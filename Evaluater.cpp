@@ -151,7 +151,7 @@ public:
         int index1, index2;
 
         // unary operations
-        for (int i = start; i < end; i++)
+        for (int i = end-1; i >= start; i--)
         {
             if (flags[i] == UNARY)
             {
@@ -174,6 +174,12 @@ public:
                     putNum(1.0 / getCos(equation[index2], degree_mode), index2);
                 else if (equation[i] == COT)
                     putNum(1.0 / getTan(equation[index2], degree_mode), index2);
+                else if(equation[i] == ASIN)
+                    putNum(getArcSin(equation[index2], degree_mode), index2);
+                else if(equation[i] == ACOS)
+                    putNum(getArcCos(equation[index2], degree_mode), index2);
+                else if(equation[i] == ATAN)
+                    putNum(getArcTan(equation[index2], degree_mode), index2);
                 else if (equation[i] == LOG)
                     putNum(getLog(equation[index2]), index2);
                 else if (equation[i] == LN)
