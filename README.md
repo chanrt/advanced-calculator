@@ -8,14 +8,9 @@ Current features:
 4) Binary functions: addition, subtraction, multiplication, division, modulo, power, permutation, combination, log_(base) (number)
 5) Mutiple argument functions: Mean and standard deviation
 6) Constants:
-
   a) Mathematical constants: pi, Euler's number, golden ratio 
-  
   b) Universal constants: speed of light, Planck's constant, reduced Planck constant
-  
   c) Atomic and nuclear constants: masses of proton, neutron and electron, Bohr radius, fine structure constant, Hartree energy, Rydberg's constant, 1st and 2nd radiation constant
-  
   d) Physio-chemical constants: atomic mass unit, Avogadro number, Boltzmann constant, Faraday constant, universal gas constant, Stefan - Boltzmann constant, Wien's constant
-  
   e) Electromagnetic constants: vacuum permittivity, vacuum permeability, vacuum impedance, Coulomb's constant, elementary charge, Bohr magneton, nuclear magneton, Von Klitzing constant
   
