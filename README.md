@@ -14,3 +14,10 @@ Current features:
   d) Physio-chemical constants: atomic mass unit, Avogadro number, Boltzmann constant, Faraday constant, universal gas constant, Stefan - Boltzmann constant, Wien's constant
   e) Electromagnetic constants: vacuum permittivity, vacuum permeability, vacuum impedance, Coulomb's constant, elementary charge, Bohr magneton, nuclear magneton, Von Klitzing constant
   
+Notes:
+1) Evaluates unary functions first: The unary function closest to operand is applied first. Eg: in "$ sqrt ~2", reciprocal is taken first and then sqrt is applied. All unary functions except ! (factorial) are pre-operand, hence ! has first priority and the rest of unary functions have second priority
+2) Order of evaluation of binary functions: log_, modulo, permutation, combination, power, division, multiplication, addition, subtraction
+3) All constants need to be preceeded by a '#". For example, "$ #c" gives you the speed of light
+4) Use brackets '(' and ')' to specify the required order of evaluation
+
+  
