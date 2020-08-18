@@ -14,6 +14,7 @@ Reader reader;
 Evaluater evaluater;
 
 #include "initializer.cpp"
+#include "communicator.cpp"
 
 using namespace std;
 int current_command;
@@ -22,6 +23,8 @@ void reinit_eval()
 {
     reader.clearExternalData();
     evaluater.clearData();
+    show_eval_equals = true;
+    show_eval_result = true;
 }
 
 bool isNotExit(string prompt)
@@ -75,6 +78,7 @@ int main()
 
     current_command = EVAL;
     string prompt = "";
+    double result;
 
     while (isNotExit(prompt))
     {
@@ -92,7 +96,14 @@ int main()
             if (reader.getEquationSize() > 0)
             {
                 evaluater.initialize(reader.getEquation(), reader.getFlags());
-                cout << " = " << evaluater.evaluate(0, reader.getEquationSize()) << endl;
+                result = evaluater.evaluate(0, reader.getEquationSize());
+
+                if(show_eval_equals)
+                    cout << " = ";
+                if(show_eval_result)
+                    cout << result;
+                    
+                cout << endl;
                 reinit_eval();
             }
         }

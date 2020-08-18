@@ -1,8 +1,9 @@
 #include <vector>
 #include <cmath>
 #include "flags.cpp"
-#include "Math.cpp"
+#include "math/Math.cpp"
 #include "constants.cpp"
+#include "communicator.cpp"
 using namespace std;
 
 class Evaluater
@@ -205,6 +206,24 @@ public:
                     putNum(pow(equation[index2], 0.3333333333), index2);
                 else if (equation[i] == RECI)
                     putNum(1.0 / equation[index2], index2);
+                else if (equation[i] == IS_PRIME)
+                {
+                    no_result = true;
+                    if (isPrime(equation[index2]))
+                        cout << "The number " << equation[index2] << " is prime";
+                    else
+                        cout << "The number " << equation[index2] << " is not prime";
+                }
+                else if (equation[i] == PRIME_FACTORS)
+                {
+                    putNum(primeFactors(equation[index2]), index2);
+                    cout << "Number of prime factors: ";
+                }
+                else if (equation[i] == PRIME_FACTORIZE)
+                {
+                    putNum(primeFactorize(equation[index2]), index2);
+                    cout << "Number of terms: ";
+                }
 
                 clearIndex(i);
             }
@@ -273,46 +292,26 @@ public:
         {
             if (flags[i] == MULTI)
             {
-                if (equation[i] == MEAN_SD)
+                index1 = getFirstNumToRight(i, end);
+                index2 = getFirstNonNumToRight(index1, end);
+
+                if (index2 == -1)
+                    index2 = end;
+
+                if (equation[i] == LCM)
                 {
-                    index1 = getFirstNumToRight(i, end);
-                    index2 = getFirstNonNumToRight(index1, end);
-
-                    if (index2 == -1)
-                        index2 = end;
-
-                    if (debug_eval)
-                        printf("Index1: %d and Index2: %d\n", index1, index2);
-
-                    float sum = 0.0;
-                    int nums = 0;
-                    int last_num_index;
-
-                    for (int j = index1; j < index2; j++)
-                    {
-                        if (flags[j] == NUM)
-                        {
-                            sum += equation[j];
-                            nums++;
-                            last_num_index = j;
-
-                            if (debug_eval)
-                                printf("Index visited for mean_sd: %d\n", j);
-                        }
-                    }
-
-                    float mean = sum / nums;
-                    sum = 0.0;
-
-                    for (int j = index1; j <= last_num_index; j++)
-                    {
-                        if (flags[j] == NUM)
-                            sum += (mean - equation[j]) * (mean - equation[j]);
-                    }
-                    printf("Mean: %f and Standard deviation: %f", mean, sqrt(sum / nums));
-
                     no_result = true;
-                    makeEmpty(i, last_num_index);
+                    makeEmpty(i, getLCM(equation, flags, index1, index2));
+                }
+                else if (equation[i] == HCF)
+                {
+                    no_result = true;
+                    makeEmpty(i, getHCF(equation, flags, index1, index2));
+                }
+                else if (equation[i] == MEAN_SD)
+                {
+                    no_result = true;
+                    makeEmpty(i, mean_sd(equation, flags, index1, index2));
                 }
             }
         }
@@ -328,10 +327,13 @@ public:
         else if (!no_result)
             printf("Error in evaluation");
 
+        show_eval_equals = show_eval_result = !no_result;
+
         return 0;
     }
 
-    void initialize(vector<double> equations_array, vector<int> flags_array)
+    void
+    initialize(vector<double> equations_array, vector<int> flags_array)
     {
         equation = equations_array;
         flags = flags_array;

@@ -1,48 +1,6 @@
-#ifndef MATH
-#define MATH
+#include <cmath>
 
 #define PI_PREC 3.14159265358979323846264338327950288419
-#include <iostream>
-#include <cmath>
-using namespace std;
-
-long long getFact(int num)
-{
-    if (num == 0 || num == 1)
-        return 1;
-
-    long long answer = num;
-    for (int i = num - 1; i > 0; i--)
-    {
-        answer = answer * i;
-    }
-    return answer;
-}
-
-double getPerm(int n, int r)
-{
-    return (getFact(n)/getFact(n-r));
-}
-
-double getComb(int n, int r)
-{
-    return (getPerm(n,r)/getFact(r));
-}
-
-double getLn(double num)
-{
-    return log(num);
-}
-
-double getLog(double num)
-{
-    return (log(num)/log(10.0));
-}
-
-double getLogBaseN(double num, double base)
-{
-    return (log(num)/log(base));
-}
 
 double getRadians(double degrees)
 {
@@ -101,5 +59,3 @@ double getArcTan(double num, bool degree_mode)
     else
         return asin(num);
 }
-
-#endif

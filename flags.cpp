@@ -28,7 +28,10 @@ enum UNARY_OPERATIONS
     LN,
     SQRT,
     CBRT,
-    RECI
+    RECI,
+    IS_PRIME,
+    PRIME_FACTORS,
+    PRIME_FACTORIZE
 };
 
 enum BINARY_OPERATIONS
@@ -46,7 +49,9 @@ enum BINARY_OPERATIONS
 
 enum MULTIPLE
 {
-    MEAN_SD = 1
+    MEAN_SD = 1,
+    LCM,
+    HCF,
 };
 
 enum META_DATA

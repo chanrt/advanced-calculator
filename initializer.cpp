@@ -6,21 +6,29 @@
 
 Reader initializeUnary(Reader reader)
 {
-    reader.addEntity("~", UNARY, RECI);
     reader.addEntity("!", UNARY, FACT);
+
+    reader.addEntity("~", UNARY, RECI);
     reader.addEntity("sqrt", UNARY, SQRT);
     reader.addEntity("cbrt", UNARY, CBRT);
+
     reader.addEntity("sin", UNARY, SIN);
     reader.addEntity("cos", UNARY, COS);
     reader.addEntity("tan", UNARY, TAN);
     reader.addEntity("csc", UNARY, CSC);
     reader.addEntity("sec", UNARY, SEC);
     reader.addEntity("cot", UNARY, COT);
+
     reader.addEntity("asin", UNARY, ASIN);
     reader.addEntity("acos", UNARY, ACOS);
     reader.addEntity("atan", UNARY, ATAN);
+
     reader.addEntity("log", UNARY, LOG);
     reader.addEntity("ln", UNARY, LN);
+
+    reader.addEntity("is_prime", UNARY, IS_PRIME);
+    reader.addEntity("prime_factors", UNARY, PRIME_FACTORS);
+    reader.addEntity("prime_factorize", UNARY, PRIME_FACTORIZE);
 
     return reader;
 }
@@ -33,8 +41,8 @@ Reader initializeBinary(Reader reader)
     reader.addEntity("/", BINARY, DIV);
     reader.addEntity("^", BINARY, POW);
     reader.addEntity("%", BINARY, MOD);
-    reader.addEntity("P", BINARY, PERM);
-    reader.addEntity("C", BINARY, COMB);
+    reader.addEntity("_P_", BINARY, PERM);
+    reader.addEntity("_C_", BINARY, COMB);
     reader.addEntity("log_", BINARY, LOG_);
 
     return reader;
@@ -42,7 +50,10 @@ Reader initializeBinary(Reader reader)
 
 Reader initializeMulti(Reader reader)
 {
-    reader.addEntity("mean_sd", MULTI, MEAN_SD);
+    reader.addEntity("mean_SD", MULTI, MEAN_SD);
+
+    reader.addEntity("LCM", MULTI, LCM);
+    reader.addEntity("HCF", MULTI, HCF);
 
     return reader;
 }
