@@ -1,3 +1,6 @@
+#ifndef READER
+#define READER
+
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -308,3 +311,4 @@ public:
         debug_reader = value;
     }
 };
+#endif

@@ -2,6 +2,7 @@
 #include <cmath>
 #include "flags.cpp"
 #include "Math.cpp"
+#include "constants.cpp"
 using namespace std;
 
 class Evaluater
@@ -148,10 +149,24 @@ public:
             putNum(result, index1);
         }
 
+        // constants
+        vector<int> const_index = getConstIndex();
+        for (int i = 0; i < end; i++)
+        {
+            if (flags[i] == CONST)
+            {
+                for (int j = 0; j < const_index.size(); j++)
+                {
+                    if (equation[i] == const_index[j])
+                        putNum(getConst(j), i);
+                }
+            }
+        }
+
         int index1, index2;
 
         // unary operations
-        for (int i = end-1; i >= start; i--)
+        for (int i = end - 1; i >= start; i--)
         {
             if (flags[i] == UNARY)
             {
@@ -174,11 +189,11 @@ public:
                     putNum(1.0 / getCos(equation[index2], degree_mode), index2);
                 else if (equation[i] == COT)
                     putNum(1.0 / getTan(equation[index2], degree_mode), index2);
-                else if(equation[i] == ASIN)
+                else if (equation[i] == ASIN)
                     putNum(getArcSin(equation[index2], degree_mode), index2);
-                else if(equation[i] == ACOS)
+                else if (equation[i] == ACOS)
                     putNum(getArcCos(equation[index2], degree_mode), index2);
-                else if(equation[i] == ATAN)
+                else if (equation[i] == ATAN)
                     putNum(getArcTan(equation[index2], degree_mode), index2);
                 else if (equation[i] == LOG)
                     putNum(getLog(equation[index2]), index2);

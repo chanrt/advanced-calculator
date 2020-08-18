@@ -1,5 +1,5 @@
-#ifndef MAIN_FLAGS
-#define MAIN_FLAGS
+#ifndef FLAGS
+#define FLAGS
 enum MAIN_FLAGS
 {
     NOTHING = 0,
@@ -58,7 +58,40 @@ enum META_DATA
 
 enum CONSTANTS
 {
-    PI = 1,
-    EULER
+    PI = 0,
+    EU,
+    GR,
+
+    SOL,
+    H,
+    HC,
+    G,
+
+    EM,
+    PM,
+    NM,
+    BR,
+    FS,
+    HE,
+    R,
+
+    M_PER,
+    E_PER,
+    Z,
+    KC,
+    EC,
+    BM,
+    NUC_M,
+    VK,
+
+    AMU,
+    AN,
+    KB,
+    F,
+    C1,
+    C2,
+    UG,
+    SB,
+    WD,
 };
 #endif

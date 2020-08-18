@@ -13,56 +13,10 @@ Reader reader;
 #include "Evaluater.cpp"
 Evaluater evaluater;
 
+#include "initializer.cpp"
+
 using namespace std;
 int current_command;
-
-void initializeFunctions()
-{
-    reader.clearInternalData();
-    reader.clearExternalData();
-    reader.setDebugReader(false);
-
-    evaluater.clearData();
-    evaluater.setDegreeMode();
-    evaluater.setDebugEval(false);
-
-    reader.addEntity("+", BINARY, ADD);
-    reader.addEntity("-", BINARY, SUB);
-    reader.addEntity("*", BINARY, MUL);
-    reader.addEntity("/", BINARY, DIV);
-    reader.addEntity("^", BINARY, POW);
-    reader.addEntity("%", BINARY, MOD);
-    reader.addEntity("P", BINARY, PERM);
-    reader.addEntity("C", BINARY, COMB);
-    reader.addEntity("log_", BINARY, LOG_);
-
-    reader.addEntity("~", UNARY, RECI);
-    reader.addEntity("!", UNARY, FACT);
-    reader.addEntity("sqrt", UNARY, SQRT);
-    reader.addEntity("cbrt", UNARY, CBRT);
-    reader.addEntity("sin", UNARY, SIN);
-    reader.addEntity("cos", UNARY, COS);
-    reader.addEntity("tan", UNARY, TAN);
-    reader.addEntity("csc", UNARY, CSC);
-    reader.addEntity("sec", UNARY, SEC);
-    reader.addEntity("cot", UNARY, COT);
-    reader.addEntity("asin", UNARY, ASIN);
-    reader.addEntity("acos", UNARY, ACOS);
-    reader.addEntity("atan", UNARY, ATAN);
-    reader.addEntity("log", UNARY, LOG);
-    reader.addEntity("ln", UNARY, LN);
-    
-    
-    reader.addEntity("mean_sd", MULTI, MEAN_SD);
-
-    reader.addEntity("(", META, OPEN_BRAC);
-    reader.addEntity(")", META, CLOSE_BRAC);
-
-    cout << "----> Advanced Calculator <----" << endl;
-    cout << "The following characters and words are recognized: ";
-    reader.printInfo();
-    cout << endl;
-}
 
 void reinit_eval()
 {
@@ -116,7 +70,9 @@ void checkCommand(string prompt)
 
 int main()
 {
-    initializeFunctions();
+    cout << "----> Advanced Calculator <----" << endl;
+    reader = initializeReader(reader);
+
     current_command = EVAL;
     string prompt = "";
 
